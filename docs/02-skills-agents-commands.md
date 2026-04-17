@@ -2,11 +2,13 @@
 
 Three layers of reusable AI capability that compound over time.
 
+Write them compressed — see [ch. 11](11-compressed-config.md) for templates.
+
 ---
 
 ## Skills — Domain Expertise Packages
 
-Skills are `.claude/skills/*/SKILL.md` files. Think of them as "expert hats" Claude puts on — activated automatically or via `/skill-name`.
+`.claude/skills/*/SKILL.md` files. "Expert hats" activated automatically or via `/skill-name`.
 
 ### Real production examples (18 skills)
 
@@ -76,7 +78,7 @@ scripts/hosting/rollback APP
 
 ## Subagents — Specialized Workers
 
-Subagents are pre-configured Claude instances with specific roles. They run in parallel for complex tasks.
+Pre-configured Claude instances with specific roles. Run in parallel for complex tasks.
 
 ```
 .claude/agents/
@@ -117,7 +119,7 @@ You are the backend specialist for this project.
 
 ## Commands — Slash-Invocable Workflows
 
-Commands are workflows triggered by `/command-name`. They orchestrate multi-step processes.
+Workflows triggered by `/command-name`. Orchestrate multi-step processes.
 
 ### Production command set
 

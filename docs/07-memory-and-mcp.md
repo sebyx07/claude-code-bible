@@ -6,7 +6,7 @@ How Claude remembers across conversations and connects to external systems.
 
 ## Memory — Cross-Conversation Learning
 
-Claude Code has a file-based memory system at `~/.claude/projects/<project>/memory/`. It persists between conversations — Claude learns from your corrections and preferences over time.
+File-based memory at `~/.claude/projects/<project>/memory/`. Persists between conversations — Claude learns from corrections and preferences over time.
 
 ### Memory types
 
@@ -35,13 +35,13 @@ Use real database connections in tests, not mocks.
 
 An index file (`MEMORY.md`) tracks all memories for quick lookup.
 
-### Why memory matters
+### Why it matters
 
-Without memory, every conversation starts from zero. With memory:
-- Claude doesn't repeat mistakes you've corrected
-- Claude follows your confirmed preferences without reminders
-- Claude understands ongoing context (deadlines, decisions, who's working on what)
-- Claude knows where to find information in external systems
+Without memory, every session starts from zero. With memory:
+- No repeating mistakes you've corrected.
+- Confirmed preferences applied without reminders.
+- Ongoing context: deadlines, decisions, ownership.
+- Knows where to look in external systems.
 
 ### Memory saves automatically when:
 
@@ -56,7 +56,7 @@ Without memory, every conversation starts from zero. With memory:
 
 ## MCP Servers — External Tool Integration
 
-MCP (Model Context Protocol) gives Claude native access to external tools. Instead of switching tabs, Claude uses them directly.
+MCP (Model Context Protocol) = native external tools for Claude. No tab switching.
 
 ### Common MCP integrations
 

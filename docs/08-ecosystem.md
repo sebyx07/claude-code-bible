@@ -1,6 +1,6 @@
 # Ecosystem — Claude Task Master and Beyond
 
-Claude Code is the foundation, but there's a growing ecosystem of tools that extend it.
+Claude Code = foundation. A growing ecosystem of tools extend it.
 
 ---
 

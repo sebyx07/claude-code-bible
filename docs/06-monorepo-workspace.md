@@ -1,6 +1,6 @@
 # Monorepo Workspace — Scaling Across Repos and Servers
 
-When you have dozens of repositories, you need structure above the project level. This is about the workspace that ties everything together and enables multi-agent, multi-server development.
+Dozens of repos → need structure above the project level. The workspace ties everything together and enables multi-agent, multi-server development.
 
 ---
 
@@ -73,7 +73,7 @@ Claude always has the full picture.
 
 ## Multi-Agent, Multi-Server
 
-The workspace supports multiple Claude instances running on different servers simultaneously.
+Multiple Claude instances across different servers simultaneously.
 
 ### Setup a new server
 
@@ -102,7 +102,7 @@ They work on different repos simultaneously without conflicts. Same org context,
 
 ## The Inner Monorepo
 
-Individual projects can also be monorepos with multiple services:
+Individual projects can also be monorepos with multiple services (desktop + backend, driver + CLI + UI, mobile + API, etc.):
 
 ```
 sales-app/
@@ -115,23 +115,20 @@ sales-app/
 └── .claude/        # AI configuration (shared across all services)
 ```
 
-Multiple runtimes, one repo. Claude knows all of them because CLAUDE.md documents everything. One `/deploy` command can build, test, and deploy all services.
+Multiple runtimes, one repo. Claude knows all of them via `CLAUDE.md`. One `/deploy` can build, test, and ship every service.
 
 ---
 
 ## Why This Structure
 
-### For humans
-- One clone, run setup, everything is ready
-- Consistent tooling across all projects
-- Shared scripts and automation
+**Humans:** one clone, run setup, everything ready. Consistent tooling. Shared automation.
 
-### For AI agents
-- **Cross-repo context:** Claude working on the backend can reference patterns from the frontend
-- **Infrastructure awareness:** Claude knows the full deploy pipeline across all services
-- **Consistent patterns:** Same CLAUDE.md structure, same skill format, same conventions
-- **Scalability:** Spin up a new server, run setup, Claude is immediately productive
-- **Knowledge transfer:** Skills written for one project inform skill creation in others
+**AI agents:**
+- **Cross-repo context** — backend work can reference frontend patterns.
+- **Infrastructure awareness** — full deploy pipeline across services.
+- **Consistent patterns** — same `CLAUDE.md` structure, same skill format.
+- **Scalability** — new server, run setup, immediately productive.
+- **Knowledge transfer** — skills from one project inform others.
 
 ### Every repo gets the same .claude/ structure
 

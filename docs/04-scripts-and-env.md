@@ -1,6 +1,6 @@
 # Scripts and .env — Giving Claude Hands
 
-Scripts are how Claude interacts with your infrastructure. Instead of "go to Jenkins and click build," you give it `scripts/ci/trigger-build JOB` and it does it.
+Scripts = how Claude touches infrastructure. Not "go to Jenkins and click build" — `scripts/ci/trigger-build JOB` and done.
 
 ---
 
@@ -125,23 +125,18 @@ OPENAI_API_KEY=
 4. **Claude never sees actual secrets** — just runs scripts that load them
 5. **New server setup:** copy `.env.example` to `.env`, fill in values
 
-### Why this matters for AI
-
-Claude interacts with your entire infrastructure through scripts that securely load credentials:
+### In practice
 
 ```
 User: "Why is the job queue backing up?"
-Claude: *runs scripts/monitoring/stats, then scripts/monitoring/busy-jobs*
-Claude: "847 jobs in default queue. 12 SyncJobs stuck retrying — rate limited.
-         Here's the fix..."
+Claude: *scripts/monitoring/stats + scripts/monitoring/busy-jobs*
+Claude: "847 jobs queued. 12 SyncJobs stuck retrying — rate limited. Fix: ..."
 ```
 
 ```
-User: "Deploy the latest"
-Claude: *runs tests, lint, security scan*
-Claude: *runs scripts/ci/trigger-build, monitors log*
-Claude: *runs scripts/hosting/app-status to verify*
-Claude: "Deployed. Health check passing. 3 migrations ran."
+User: "Deploy latest"
+Claude: *tests → lint → security scan → scripts/ci/trigger-build → monitor → scripts/hosting/app-status*
+Claude: "Deployed. Healthy. 3 migrations ran."
 ```
 
-No token copy-pasting. No dashboard switching. No SSH. Claude uses the same scripts a human would, with the same safety guardrails.
+No token copy-paste. No dashboard hopping. No SSH. Same scripts a human uses, same guardrails.

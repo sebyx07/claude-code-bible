@@ -1,6 +1,8 @@
 # CLAUDE.md — The Project Brain
 
-The single most important file. Claude reads it on every conversation start. Think of it as onboarding docs for a brilliant engineer who has amnesia every morning.
+The single most important file. Read on every conversation start. Onboarding docs for a brilliant engineer with amnesia every morning.
+
+See [ch. 11](11-compressed-config.md) for the compressed-writing rules that apply to this file.
 
 ---
 
@@ -64,7 +66,7 @@ Custom errors give better debugging, logging, and catch specificity.
 
 ### Keep it under 600 lines
 
-Claude reads it every conversation. Bloat = wasted context tokens. A well-structured 500-line CLAUDE.md covers everything for a complex production app.
+Read every conversation. Bloat = wasted tokens forever. 500 well-structured lines cover a complex production app.
 
 ---
 
@@ -82,13 +84,13 @@ workspace/
         └── CLAUDE.md      # Different project, different context
 ```
 
-Claude loads all of them, root to project. The workspace-level gives org context; the project one gives specifics. Claude always has the full picture.
+Claude loads all, root to project. Workspace = org context. Project = specifics. Full picture, no duplication.
 
 ---
 
 ## Response rules
 
-Put behavioral instructions at the top of CLAUDE.md. This shapes how Claude interacts with you across the entire session:
+Behavioral instructions at the top of `CLAUDE.md`. Shapes Claude across the session:
 
 ```markdown
 ## Response Rules
@@ -100,10 +102,10 @@ Put behavioral instructions at the top of CLAUDE.md. This shapes how Claude inte
 - Disagree when the user is wrong. State the correction directly.
 ```
 
-This alone transforms Claude from a chatbot into an executor. No fluff, no narration, just code.
+Transforms Claude from chatbot to executor. No fluff, no narration, just code.
 
 ---
 
 ## Self-updating
 
-Create a `/update-claude` command so Claude keeps CLAUDE.md current when features are added. Claude updates its own documentation — the brain maintains itself.
+Create `/update-claude` command. Claude updates `CLAUDE.md` when features land — brain maintains itself.

@@ -1,16 +1,16 @@
 # Planning, Docs, and Fast Feedback Loops
 
-Architecture, planning, documentation, and speed. These are what separate "AI helps me write code" from "AI builds my product."
+Architecture, planning, documentation, speed. Separates "AI helps me write code" from "AI builds my product."
 
 ---
 
 ## Architecture — The Foundation
 
-Good architecture isn't optional with AI. It's the single biggest multiplier.
+Biggest single multiplier with AI. Not optional.
 
-### Why architecture matters more with AI
+### Why it matters more with AI
 
-Claude reads your codebase to understand it. With good architecture:
+Claude reads your codebase to understand it. Good architecture:
 - **Predictable structure** → Claude finds things in one grep, not ten
 - **Small focused files** → Claude reads and modifies in one pass, no chunking
 - **Clear boundaries** → Claude knows where new code belongs without asking
@@ -38,7 +38,7 @@ With bad architecture:
 
 ## Planning — Before You Code
 
-The `/plan` command exists for a reason. Planning before implementation is dramatically more effective with AI.
+`/plan` exists for a reason. Planning before implementation is dramatically more effective with AI.
 
 ### The planning workflow
 
@@ -56,15 +56,15 @@ Claude:
 └── context.md       # Relevant code snippets, patterns found
 ```
 
-### Why planning matters for AI
+### Why planning matters
 
-Without a plan, Claude starts coding immediately and discovers problems halfway through — wrong pattern, missing dependency, conflicting approach. Then it backtracks, wastes tokens, and produces inconsistent code.
+Without a plan: Claude codes immediately, hits problems halfway (wrong pattern, missing dep, conflict), backtracks, wastes tokens, produces inconsistent code.
 
 With a plan:
-- Claude explores first, codes second
-- The plan captures architecture decisions before implementation
-- You review the plan in 2 minutes instead of reviewing 20 files of code
-- If the approach is wrong, you catch it before any code is written
+- Explores first, codes second.
+- Architecture decisions captured before implementation.
+- Review plan in 2 min vs 20 files of code.
+- Catch wrong approach before any code exists.
 
 ### Plan structure (concise!)
 
@@ -128,7 +128,7 @@ Claude reads CLAUDE.md every conversation. It reads docs/ only when relevant (vi
 
 ## Concise Documentation — The Golden Rule
 
-**Every markdown file Claude reads costs tokens. Write like you're paying per word — because you are.**
+**Every markdown file Claude reads costs tokens. Write like you're paying per word — because you are.** See [ch. 11](11-compressed-config.md) for the detailed rules and templates.
 
 ### Bad (fluff)
 
@@ -175,7 +175,7 @@ Deps: injected via constructor (see service base class)
 
 ## Fast Feedback Loops — Speed Matters
 
-Claude's effectiveness is directly proportional to how fast it can iterate. Slow tests = slow Claude. Slow builds = slow Claude.
+Claude's effectiveness ∝ iteration speed. Slow tests = slow Claude. Slow builds = slow Claude.
 
 ### Local speed
 
@@ -187,7 +187,7 @@ Claude's effectiveness is directly proportional to how fast it can iterate. Slow
 | Dev server start | < 5 seconds | Claude needs to test UI changes |
 | Single test file | < 3 seconds | Claude runs focused tests constantly |
 
-**Optimize for Claude's loop:** edit → test → edit → test. If running one test file takes 30 seconds, Claude wastes 30 seconds * 20 iterations = 10 minutes waiting. If it takes 2 seconds, that's 40 seconds total.
+**Optimize for the loop:** edit → test → edit → test. One test file: 30s × 20 iterations = 10 min waiting. 2s × 20 = 40s. Compounds hard.
 
 ### CI/CD speed
 
@@ -222,7 +222,7 @@ Claude edits src/services/payment/processor.py
 Total: ~7 minutes from code to production
 ```
 
-Compare to a slow setup: 30-second tests, 15-minute CI, 10-minute deploy = 35+ minutes of mostly waiting. Claude sits idle. You sit idle. Everyone loses.
+Slow setup: 30s tests, 15min CI, 10min deploy = 35+ min of mostly waiting. Claude idle, you idle. Everyone loses.
 
 ---
 
@@ -235,4 +235,4 @@ Concise docs          → Claude reads fast, retains more
 Fast feedback loops   → Claude iterates 10x more in the same time
 ```
 
-These four multiply each other. Good architecture with slow tests is wasted. Fast tests with bad architecture catch the wrong things. Planning without concise docs means plans are bloated. All four together is where the magic happens.
+The four multiply. Good architecture + slow tests = wasted. Fast tests + bad architecture = catches wrong things. Planning without concise docs = bloated plans. All four together = magic.
