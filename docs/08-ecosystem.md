@@ -70,18 +70,17 @@ MCP (Model Context Protocol) lets you create custom tool servers that Claude can
 
 ### Example: custom deployment MCP
 
-Instead of scripts, you could build an MCP server that gives Claude deploy tools directly:
+Instead of scripts, you could build an MCP server that gives Claude deploy tools directly. Keep the surface small and parameterized — one `deploy` tool with verbs beats five narrow tools (see [ch. 7](07-memory-and-mcp.md#building-mcp-servers--few-parameterized-tools-beat-many) for why):
 
 ```
-Tools available:
-- deploy_to_staging(service, branch)
-- deploy_to_production(service)
-- rollback(service, version)
-- get_deploy_status(service)
-- get_service_logs(service, lines)
+deploy({ action: "promote", service: "api", env: "staging", branch: "main" })
+deploy({ action: "promote", service: "api", env: "production" })
+deploy({ action: "rollback", service: "api", version: "v1.42.0" })
+deploy({ action: "status",   service: "api" })
+deploy({ action: "logs",     service: "api", lines: 200 })
 ```
 
-Claude would call these as native tools — no shell commands needed. The MCP server handles auth, validation, and safety internally.
+Claude calls these as native tools — no shell commands needed. The MCP server handles auth, validation, and safety internally.
 
 ### When to use MCP vs scripts
 

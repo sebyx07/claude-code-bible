@@ -24,7 +24,7 @@ Battle-tested across 50+ projects — the whole spectrum of software. Rails, Typ
 | 04 | [Scripts and Env](docs/04-scripts-and-env.md) | Infrastructure scripts, `.env` files, giving Claude hands |
 | 05 | [Hooks and Permissions](docs/05-hooks-and-permissions.md) | Quality gates, allow-all tools, trust boundaries |
 | 06 | [Monorepo Workspace](docs/06-monorepo-workspace.md) | Multi-repo workspace, multi-agent, scaling across servers |
-| 07 | [Memory and MCP](docs/07-memory-and-mcp.md) | Cross-conversation memory, MCP tool integrations |
+| 07 | [Memory and MCP](docs/07-memory-and-mcp.md) | Cross-conversation memory, MCP tool integrations, building efficient MCP servers |
 | 08 | [Ecosystem](docs/08-ecosystem.md) | Claude Task Master and the broader AI dev ecosystem |
 | 09 | [Checklist](docs/09-checklist.md) | Step-by-step setup checklist |
 | 10 | [Planning and Docs](docs/10-planning-and-docs.md) | Planning workflow, docs directory, concise documentation |
