@@ -107,6 +107,58 @@ Tools become available in every conversation automatically. Claude discovers wha
 
 ---
 
+## Make Your App AI-Debuggable — `?debug-ai=true` Login Bypass
+
+Captchas are the #1 thing that blocks Playwright/MCP browser flows. The widget renders fine, but a headless agent can't solve it — so every "Claude, log in and check the UI" attempt hard-stops at the login page.
+
+**Pattern:** add a single query-param escape hatch that skips *captcha verification* (not auth) when present. The widget still renders so the page looks identical to real users; only the server-side verify is short-circuited.
+
+### Rails + Devise + hCaptcha example
+
+```ruby
+# app/controllers/users/sessions_controller.rb
+class Users::SessionsController < Devise::SessionsController
+  prepend_before_action :check_captcha, only: :create
+  helper_method :debug_ai_bypass?
+
+  private
+
+  def check_captcha
+    return unless hcaptcha_enabled?
+    return if debug_ai_bypass?
+    return if verify_hcaptcha
+    # ...fail path
+  end
+
+  # ?debug-ai=true skips captcha verification (widget still renders).
+  def debug_ai_bypass?
+    params['debug-ai'].to_s == 'true'
+  end
+end
+```
+
+```erb
+<%# app/views/devise/sessions/new.html.erb %>
+<% form_url = debug_ai_bypass? ? session_path(resource_name, 'debug-ai' => 'true') : session_path(resource_name) %>
+<%= form_for(resource, as: resource_name, url: form_url) do |f| %>
+  <%# ...email, password, hcaptcha_tag... %>
+<% end %>
+```
+
+The form action carries the param through so the POST also bypasses.
+
+### Why this works
+
+- **Credentials still required.** Email + password + Devise lockouts / rate limits all apply. Captcha is anti-bot, not auth.
+- **No DOM drift.** The widget still mounts, so screenshots match what real users see.
+- **One URL toggle.** No env var to flip, no separate "debug build" — flip it on per-request.
+
+Use it from `use-browser` / Playwright MCP / system tests against staging or prod. If brute-force exposure becomes a concern, gate the bypass behind `ENV['ALLOW_AI_DEBUG_LOGIN']` so it's off in production by default.
+
+The same idea generalizes: anywhere your app has a human-only checkpoint (captcha, magic-link, SMS code), expose a narrow `?debug-ai=true` bypass that preserves credentials/authz but removes the human-interaction requirement. AI agents become first-class users of your own app.
+
+---
+
 ## Building MCP Servers — Few Parameterized Tools Beat Many
 
 The single biggest mistake when building an MCP server: shipping one tool per action. `create_user`, `update_user`, `list_users`, `get_user`, `delete_user`, `archive_user` × every model = 50+ tools. Every one of those names, descriptions, and JSON schemas sits in the model's context **on every turn** after `tools/list`. 50 tools × ~200 tokens of schema = 10k tokens of overhead per request, forever — eating the budget you wanted for actual work.
