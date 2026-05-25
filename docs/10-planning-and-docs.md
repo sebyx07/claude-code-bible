@@ -173,6 +173,33 @@ Deps: injected via constructor (see service base class)
 
 ---
 
+## Docs decay — write for the next session
+
+Docs go stale on a timeline you can't predict. Implications:
+
+- **Write for the next action, not for posterity.** "Stripe webhook → `src/payments/stripe_webhook.py`" earns its tokens every session it's relevant; "Comprehensive payments architecture overview" is a maintenance liability.
+- **Date load-bearing claims.** `As of 2026-05` beats `currently`. Stale notes are obvious and skippable.
+- **Gap statements rot fastest.** "We haven't done X yet" is wrong the day someone does X. "When you do X, follow `path/to/pattern.py`" survives.
+- **Delete > update** when in doubt. A wrong doc costs more than a missing one — Claude trusts what's there.
+
+Same instinct readers (human and AI) use: nobody cares that you wrote it. They care that it changes what they do now. If it doesn't, cut it. See [ch. 11 · Value, not explanation](11-compressed-config.md#value-not-explanation).
+
+---
+
+## Prompts you write to Claude
+
+Same rules apply to the prompts you type. Claude reads them to pick an action — not to be polite to you.
+
+| Weak | Strong |
+|---|---|
+| "Can you help me with the auth flow?" | "Auth: login endpoint returns 500 when email contains `+`. Fix in `src/auth/login.py`." |
+| "I'd like to refactor the user model." | "User model is 1200 LOC. Split into `User`, `User::Profile`, `User::Preferences`. Tests in `tests/models/user/`." |
+| "What do you think about adding Stripe?" | "Plan adding Stripe webhook handling. Follow `src/payments/paypal_handler.py`." |
+
+Lead with the constraint, the file, or the goal. Drop throat-clearing. Specify paths when you know them — Claude grep'ing for context costs more than you typing the path once.
+
+---
+
 ## Fast Feedback Loops — Speed Matters
 
 Claude's effectiveness ∝ iteration speed. Slow tests = slow Claude. Slow builds = slow Claude.

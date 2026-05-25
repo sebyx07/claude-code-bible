@@ -28,6 +28,15 @@ Controllers are thin — delegate to services. Models handle persistence only.
 Keep all files under 500 LOC. Split into nested modules when needed.
 ```
 
+### Lead with the constraint, not the tour
+
+Claude reads `CLAUDE.md` to decide what to do *next turn* — same way a busy senior engineer skims onboarding docs. Open with the rule that changes behavior, not project history.
+
+❌ "This is a Rails app using PostgreSQL with a service-oriented architecture…"
+✅ "Business logic → `app/services/<domain>/`. Controllers thin. Custom errors only."
+
+Same instinct as the prior rule, applied to the *opening* — where readers decide whether to keep reading. See [ch. 11 · Value, not explanation](11-compressed-config.md#value-not-explanation) for value-words and the gap-vs-error framing.
+
 ### Exact commands
 
 Claude can't guess your CLI:

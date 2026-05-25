@@ -71,8 +71,10 @@ scripts/hosting/rollback APP
 
 - One skill per domain, not one skill per task
 - `description` is the trigger — pack it with keywords Claude would match
+- `description` signals *when to activate*, not what the skill is. `Deploy app — test, build, push, verify. Triggers: deploy, ship, release.` not `Deployment skill for releasing the app.` Claude matches the first; the second sounds like a self-introduction
 - Use `allowed-tools` to enforce safety (read-only debugging, no writes during review)
 - Supporting files let you add depth without bloating SKILL.md
+- Inside the body: instruct, don't explain. Numbered steps, exact commands, failure branches inline. Skip the "what this skill does" preamble — Claude already read the `description`. See [ch. 11 · Value, not explanation](11-compressed-config.md#value-not-explanation)
 
 ---
 

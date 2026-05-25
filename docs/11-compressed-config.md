@@ -34,6 +34,48 @@ Every filler word = token tax on every session. A 600-line fluffy `CLAUDE.md` co
 
 ---
 
+## Value, not explanation
+
+Claude is your reader. Not your student, not your grader. Reads your `CLAUDE.md` to decide the next action — not to verify you know your own codebase. Lines that don't change a decision are filler. Cut them.
+
+Same logic as humans. Expert readers — human or AI — read selfishly. They scan for what's useful to them *right now*, skip the rest, and abandon prose that doesn't earn its tokens. Writing for Claude is not a special skill; it's writing the way busy experts already read. Adapted from Larry McEnerney's *Craft of Writing Effectively* (UChicago) — readers stop, misunderstand, or get aggravated when prose signals continuity instead of value.
+
+### Value-words (the community code)
+
+Words that tell Claude this matters and what to do:
+
+| Function | Words |
+|----------|-------|
+| Hard rule | `MUST`, `NEVER`, `ALWAYS`, `required`, `forbidden` |
+| Cause/cost | `breaks when`, `fails if`, `causes`, `without this` |
+| Boundary | `before X`, `after Y`, `only in`, `not in` |
+| Trigger | `when Z`, `if user asks`, `on commit` |
+
+A `CLAUDE.md` section with zero value-words is probably narration. Rewrite as instruction.
+
+### Kill flow-words
+
+Drop: `however`, `moreover`, `furthermore`, `in addition`, `additionally`, `thus`, `therefore`, `as such`, `it should be noted`. They signal essay-mode — Claude is looking for rules, not transitions.
+
+### Open with a constraint, not a tour
+
+| ❌ Tour | ✅ Constraint |
+|---|---|
+| "This is a Rails app using PostgreSQL. We follow service-oriented patterns…" | "Business logic → `app/services/<domain>/`. Controllers thin. Custom errors only — no `Exception`." |
+
+The tour is you talking to yourself. The constraint changes what Claude writes next.
+
+### Gap ≠ error
+
+| Weak (gap) | Strong (error) |
+|------|--------|
+| "We haven't documented the webhook flow." | "Webhooks: always call `Webhook.verify` first — signature verification was missed twice." |
+| "Auth is complex." | "Auth: never read `current_user` in models. Pass it explicitly." |
+
+"Gap" assumes Claude will fill it correctly. "Error" tells Claude what went wrong before and prevents the repeat.
+
+---
+
 ## `CLAUDE.md` — before / after
 
 ### Before (fluff)
@@ -223,6 +265,9 @@ Claude loads both. Keep each layer to its scope — no duplication. Org file: cr
 - [ ] Tables used for any ≥3-row structured data
 - [ ] Commands quoted exactly, not described
 - [ ] File ≤ target (CLAUDE.md <600 · SKILL.md <80 · agent <50 · command <30)
+- [ ] Every section has at least one value-word (`MUST`/`NEVER`/`fails when`/`breaks if`/`when X`)
+- [ ] Flow-words (`however`/`moreover`/`thus`/`furthermore`) removed
+- [ ] Opens with a constraint or rule, not project history
 
 ---
 
