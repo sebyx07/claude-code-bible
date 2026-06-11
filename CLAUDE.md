@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A prose book — "The Claude Code Bible" — distributed as Markdown. No source code, no build, no tests, no CI. Edits ship by committing `.md` files.
 
 - `README.md` — landing page and chapter index (TOC table, quick wins, license).
-- `docs/NN-<slug>.md` — numbered chapters, 01 through 11. Read top-to-bottom as a book.
+- `docs/NN-<slug>.md` — numbered chapters, 01 through 12. Read top-to-bottom as a book.
 - `LICENSE` — MIT.
 - `.gitignore` ignores `.claude/`, so local agent config here is never committed.
 

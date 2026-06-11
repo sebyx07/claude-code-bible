@@ -29,6 +29,7 @@ Battle-tested across 50+ projects — the whole spectrum of software. Rails, Typ
 | 09 | [Checklist](docs/09-checklist.md) | Step-by-step setup checklist |
 | 10 | [Planning and Docs](docs/10-planning-and-docs.md) | Planning workflow, docs directory, concise documentation |
 | 11 | [Compressed Config](docs/11-compressed-config.md) | Writing `CLAUDE.md` and `.claude/*` for minimum tokens |
+| 12 | [Behavioral Rules](docs/12-behavioral-rules.md) | Steering how Claude codes — assumptions, simplicity, surgical diffs, success criteria |
 
 ---
 
@@ -55,7 +56,7 @@ The four things that give you 80% of the value in under an hour:
 
 1. **[CLAUDE.md](docs/01-claude-md.md) with commands** — document your test, lint, and deploy commands
 2. **Skip the prompts** — `claude --dangerously-skip-permissions`. Zero friction. See [ch. 5](docs/05-hooks-and-permissions.md)
-3. **Response rules** — "No preamble, lead with action, disagree when wrong" changes Claude's entire personality
+3. **Response + coding rules** — "No preamble, lead with action, disagree when wrong" changes Claude's personality; the [behavioral rules block](docs/12-behavioral-rules.md) changes its code
 4. **One lint command** — `bin/lint` that auto-fixes everything, wired as a pre-commit hook
 
 New to this? Start with the [Checklist](docs/09-checklist.md).

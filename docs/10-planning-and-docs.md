@@ -94,6 +94,8 @@ With a plan:
 
 30 lines. No fluff. All signal. Claude can execute this without ambiguity.
 
+Stronger still: attach a verification to each step — `step → verify: check`. Verifiable success criteria let Claude loop to completion without you adjudicating "done". See [ch. 12](12-behavioral-rules.md#success-criteria-beat-instructions).
+
 ---
 
 ## Docs Directory — Organizational Knowledge

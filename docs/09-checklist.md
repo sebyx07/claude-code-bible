@@ -13,6 +13,7 @@ Start small, expand as you find yourself repeating instructions.
     - All runnable commands (test, lint, build, deploy — exact CLI)
     - Architecture patterns (where business logic goes, file size limits)
     - Response rules (no preamble, lead with action, disagree when wrong)
+    - Behavioral rules (surface assumptions, simplicity first, surgical diffs — see ch. 12)
 
 [ ] Permissions — recommended: `claude --dangerously-skip-permissions`
     - Zero prompts. Maximum autonomy. What most daily users actually run.
@@ -132,7 +133,7 @@ The 4 things that give you 80% of the value in under an hour:
 
 1. **`CLAUDE.md` with commands** — document test, lint, deploy. 3× more useful immediately.
 2. **Skip the prompts** — `claude --dangerously-skip-permissions`. Zero friction. What most daily users run.
-3. **Response rules** — "No preamble, lead with action, disagree when wrong." Changes Claude's personality.
+3. **Response + coding rules** — "No preamble, lead with action, disagree when wrong" changes the personality; the [behavioral rules block](12-behavioral-rules.md) changes the code.
 4. **One lint command** — `bin/lint` auto-fixes everything. Wire as pre-commit hook.
 
 ---

@@ -113,6 +113,8 @@ Behavioral instructions at the top of `CLAUDE.md`. Shapes Claude across the sess
 
 Transforms Claude from chatbot to executor. No fluff, no narration, just code.
 
+Response rules shape the *output*. For rules that shape the *code* — assumptions, scope discipline, success criteria — see [ch. 12](12-behavioral-rules.md).
+
 ---
 
 ## Self-updating
