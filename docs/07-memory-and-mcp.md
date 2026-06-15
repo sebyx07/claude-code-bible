@@ -163,6 +163,16 @@ The same idea generalizes: anywhere your app has a human-only checkpoint (captch
 
 The single biggest mistake when building an MCP server: shipping one tool per action. `create_user`, `update_user`, `list_users`, `get_user`, `delete_user`, `archive_user` × every model = 50+ tools. Every one of those names, descriptions, and JSON schemas sits in the model's context **on every turn** after `tools/list`. 50 tools × ~200 tokens of schema = 10k tokens of overhead per request, forever — eating the budget you wanted for actual work.
 
+The overhead is linear in your API surface, and it never amortizes — it's re-sent every turn (same token-budget logic as [ch. 11](11-compressed-config.md)):
+
+| Resources (6 verbs each) | One-tool-per-verb | `tools/list` cost, **every turn** | 3-meta-tool cost |
+|---|---|---|---|
+| 5 | 30 tools | ~6k tokens | ~0.6k, flat |
+| 50 | 300 tools | ~60k tokens | ~0.6k, flat |
+| 500 | 3,000 tools | ~600k tokens (won't fit) | ~0.6k, flat |
+
+(~200 tokens per tool for name + description + JSON schema; the three meta-tools are a flat ~0.6k no matter how many resources sit behind them.)
+
 **AIs are smart. They can dispatch on a parameter.** You don't need a separate tool per verb — one parameterized tool with a `resource` and `action` works. Let the model decide; that's what it's good at.
 
 ### The 3-tool meta pattern
@@ -230,6 +240,16 @@ AIs are very good at SQL and REST APIs precisely because those interfaces are he
 The same logic applies to writes: one `update` action that takes `id` + `attributes` beats `rename_X`, `change_X_status`, `assign_X_to_Y`. The model knows which fields to pass.
 
 **Whitelist, don't blacklist.** Filters, sort fields, and scopes should be opt-in per resource — otherwise you're shipping a SQL injection surface. The handler validates `filters.keys` against an allowed list and rejects the rest before touching the DB.
+
+### The honest tradeoff — lazy schemas cost a round-trip
+
+Lazy loading isn't free. The first time the model touches a resource it usually spends one turn on `describe_resource` before it can call `manage_resource` — you trade constant per-turn overhead for a one-time-per-resource handshake. Three ways to shrink it:
+
+- **Make `list_resources` rich enough to act without describing.** Carry each resource's action list *and* a one-line param hint inline — enough for the model to compose the common `list` / `get` / `create` call directly. Reserve `describe_resource` for the long tail: full attribute schemas, enums, validation rules.
+- **Let the model batch.** Accept an array — `describe_resource(resources: ["deals", "contacts"])` — so multi-resource work costs one handshake, not one per resource.
+- **Cache it.** Schemas are stable between deploys; an MCP host that caches `describe_resource` results pays the handshake once per session, not once per task.
+
+Net: for a handful of resources hit on every turn, plain tools can still win — the handshake never amortizes there. The meta pattern pays off when the catalog is large or sparsely used, which is exactly when a flat tool list would blow the budget.
 
 ### When to break the pattern
 
