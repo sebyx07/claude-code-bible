@@ -30,6 +30,7 @@ Battle-tested across 50+ projects — the whole spectrum of software. Rails, Typ
 | 10 | [Planning and Docs](docs/10-planning-and-docs.md) | Planning workflow, docs directory, concise documentation |
 | 11 | [Compressed Config](docs/11-compressed-config.md) | Writing `CLAUDE.md` and `.claude/*` for minimum tokens |
 | 12 | [Behavioral Rules](docs/12-behavioral-rules.md) | Steering how Claude codes — assumptions, simplicity, surgical diffs, success criteria |
+| 13 | [Workflow Commands](docs/13-workflow-commands.md) | `/planx` and `/feature` — durable plans on disk, idea-to-deployed execution, why not worktrees |
 
 ---
 
