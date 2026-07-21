@@ -54,3 +54,7 @@ There is no linter or test. Before committing:
 ## Git workflow
 
 Normal flow: branch, edit, commit, PR to `main`. Recent history (`git log --oneline`) shows the commit-message style — short imperative subject, optionally one blank line and a body. Match it.
+
+## Note
+
+Do not use git worktrees — work directly in this checkout. See `.claude/commands/feature.md` and `.claude/commands/planx.md`.
